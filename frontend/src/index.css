@@ -1,1 +1,100 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* React Quill Container */
+.ql-container.ql-snow {
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.75; /* 28px */
+  color: #1f2937; /* gray-800 */
+}
+
+.ql-editor {
+  padding: 0;
+}
+
+/* Headings */
+.ql-editor h1 {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 800;
+  margin: 2rem 0 1.5rem;
+  color: #111827; /* gray-900 */
+  line-height: 1.3;
+}
+
+.ql-editor h2 {
+  font-size: 1.875rem; /* 30px */
+  font-weight: 700;
+  margin: 1.75rem 0 1.25rem;
+  color: #1f2937; /* gray-800 */
+  line-height: 1.4;
+}
+
+.ql-editor h3 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+  margin: 1.5rem 0 1rem;
+  color: #374151; /* gray-700 */
+}
+
+/* Text Elements */
+.ql-editor p {
+  margin-bottom: 1.5rem;
+  line-height: 1.75;
+}
+
+.ql-editor strong {
+  font-weight: 600;
+  color: #111827; /* gray-900 */
+}
+
+/* Lists */
+.ql-editor ul,
+.ql-editor ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+}
+
+.ql-editor li {
+  margin-bottom: 0.75rem;
+}
+
+.ql-editor ul li {
+  list-style-type: disc;
+}
+
+.ql-editor ol li {
+  list-style-type: decimal;
+}
+
+/* Links */
+.ql-editor a {
+  color: #2563eb; /* blue-600 */
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.ql-editor a:hover {
+  color: #1d4ed8; /* blue-700 */
+}
+
+/* Code Blocks */
+.ql-editor pre {
+  background-color: #f3f4f6; /* gray-100 */
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem; /* 14px */
+}
+
+/* Images */
+.ql-editor img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1.5rem auto;
+  display: block;
+}
+

@@ -31,7 +31,7 @@ export default function EditBlog() {
   if (!blog) return null;
 
   return (
-    <div className="max-w-md mx-auto mt-10">
+    <div className="max-w-5xl mx-auto mt-10">
       <BlogForm onFinish={onFinish} loading={loading} initialValues={blog} />
     </div>
   );

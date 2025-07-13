@@ -36,7 +36,7 @@ export default function Login() {
         style={{ borderRadius: 16 }}
       >
         <Typography.Title level={2} className="text-center mb-6 text-blue-700">
-          Admin Login
+          Login
         </Typography.Title>
         <Form layout="vertical" onFinish={onFinish}>
           <Form.Item

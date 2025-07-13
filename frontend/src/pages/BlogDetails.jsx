@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getBlogById, deleteBlog } from "../services/blog";
 import { Typography, Button, Popconfirm, Divider, Space, message } from "antd";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 export default function BlogDetails() {
   const { id } = useParams();
@@ -42,26 +44,50 @@ export default function BlogDetails() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto  py-12">
-      <div className="mb-8">
-        <Typography.Title level={1} className="!mt-3 !mb-4">
+    <div className="max-w-5xl mx-auto px-4 py-8 sm:py-12">
+        <Typography.Title 
+          level={1} 
+          className="!text-3xl sm:!text-4xl !font-bold !mb-3 !text-gray-900"
+        >
           {blog?.title}
         </Typography.Title>
+        <div className="flex items-center text-gray-500 text-sm sm:text-base space-x-3">
+          <span>By {blog?.author || "Admin"}</span>
+          <span>•</span>
+          <span>{new Date(blog?.createdAt).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}</span>
+        </div>
+    
+
+      {/* Blog Content */}
+      <div className="blog-content-container">
+        <ReactQuill
+          value={blog?.content}
+          readOnly={true}
+         theme="snow"
+          modules={{ toolbar: false }}
+          className="prose prose-lg max-w-none border-none"
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            lineHeight: 1.75,
+            fontSize: '1.125rem',
+            border:"none"
+          }}
+        />
       </div>
 
-      <div className="prose max-w-none">
-        <Typography.Paragraph className="text-lg leading-relaxed">
-          {blog?.content}
-        </Typography.Paragraph>
-      </div>
-
+      {/* Admin Actions */}
       {user?.role === "ADMIN" && (
         <>
-          <Divider />
+          <Divider className="!my-8" />
           <Space>
             <Button 
               type="primary" 
               onClick={() => navigate(`/edit-blog/${id}`)}
+              className="!bg-blue-600 hover:!bg-blue-700 !text-white"
             >
               Edit Article
             </Button>

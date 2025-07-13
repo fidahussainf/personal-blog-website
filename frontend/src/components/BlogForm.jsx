@@ -1,9 +1,49 @@
 import { Form, Input, Button, Select } from "antd";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css"; // Import Quill styles
+import { useState } from "react";
 
 export default function BlogForm({ onFinish, loading, initialValues }) {
+  const [content, setContent] = useState(initialValues?.content || "");
+
+  const handleContentChange = (value) => {
+    setContent(value);
+  };
+
+  const handleFormSubmit = (values) => {
+    onFinish({ ...values, content }); // Pass content separately
+  };
+
+  // Quill modules and formats (customize toolbar)
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link", "image"],
+      ["clean"],
+    ],
+  };
+
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "list",
+    "bullet",
+    "link",
+    "image",
+  ];
+
   return (
     <div className="max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-md">
-      <Form layout="vertical" onFinish={onFinish} initialValues={initialValues}>
+      <Form
+        layout="vertical"
+        onFinish={handleFormSubmit}
+        initialValues={initialValues}
+      >
         <Form.Item
           name="title"
           label="Title"
@@ -11,19 +51,24 @@ export default function BlogForm({ onFinish, loading, initialValues }) {
         >
           <Input size="large" placeholder="Enter blog title" />
         </Form.Item>
+
         <Form.Item
           label="Content"
           required
-          name="content"
           rules={[{ required: true, message: "Please enter blog content" }]}
         >
-          <Input.TextArea
-            rows={6}
+          <ReactQuill
+            theme="snow"
+            value={content}
+            onChange={handleContentChange}
+            modules={modules}
+            formats={formats}
             placeholder="Write your blog content here..."
-            className="border rounded-lg p-2"
-            style={{ resize: "vertical" }}
+            className="rounded-lg border-gray-300"
+            style={{ height: "300px", marginBottom: "40px" }}
           />
         </Form.Item>
+
         <Form.Item
           name="author"
           label="Author"
@@ -31,6 +76,7 @@ export default function BlogForm({ onFinish, loading, initialValues }) {
         >
           <Input size="large" placeholder="Enter author name" />
         </Form.Item>
+
         <Form.Item
           name="blogCategory"
           label="Category"
@@ -39,7 +85,6 @@ export default function BlogForm({ onFinish, loading, initialValues }) {
           <Select
             size="large"
             showSearch
-            name="blogCategory"
             allowClear
             filterOption={(input, option) =>
               option.label.toLowerCase().includes(input.toLowerCase())
@@ -56,6 +101,7 @@ export default function BlogForm({ onFinish, loading, initialValues }) {
             className="w-full"
           />
         </Form.Item>
+
         <Form.Item>
           <Button
             type="primary"
